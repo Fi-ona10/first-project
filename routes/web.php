@@ -1,22 +1,26 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
-Route::get('articles', [\App\Http\Controllers\ArticleController::class, 'index'] );
-Route::get('articles/{id}', [\App\Http\Controllers\ArticleController::class, 'show'] );
+// Articles routes with names
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
-
+// Home route
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// Dashboard route with middleware
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// Grouped routes for authenticated users
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
@@ -26,7 +30,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-use App\Http\Controllers\ArticleController;
-
-Route::get('/articles', [ArticleController::class, 'index']);
