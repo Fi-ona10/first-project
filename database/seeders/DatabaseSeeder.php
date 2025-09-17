@@ -13,11 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $users = \App\Models\User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Create 10 articles, each assigned to a random user from above
+        \App\Models\Article::factory(20)->make()->each(function ($article) use ($users) {
+            $article->author_id = $users->random()->id;
+            $article->save();
+        });
+public function run(): void
+{
+    $this->call(EventSeeder::class);
+}
+
     }
 }
