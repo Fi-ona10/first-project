@@ -3,7 +3,8 @@
 
     <p class="text-sm text-gray-500 mb-4">
         By {{ $article->author?->name ?? 'Unknown author' }},
-        {{ $article->created_at->format('F j, Y') }}
+        {{-- Absicherung, falls created_at null ist --}}
+        {{ $article->created_at ? $article->created_at->format('F j, Y') : 'No date' }}
     </p>
 
     <div class="prose max-w-none">
