@@ -1,32 +1,18 @@
 <x-site-layout>
+    <h1 class="text-4xl font-bold">{{ $article->title }}</h1>
 
-            <h1 class="text-4xl font-bold">{{$article->title}}</h1>
+    <p class="text-sm text-gray-500 mb-4">
+        By {{ $article->author?->name ?? 'Unknown author' }},
+        {{ $article->created_at->format('F j, Y') }}
+    </p>
 
-                <div>
-                    {{$article->content}} 
-                </div>
-
-</x-site-layout>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $article->title }}</title>
-</head>
-<body>
-    <div>
-        <h1>{{ $article->title }}</h1>
-        <p class="meta">
-            By {{ $article->author?->name ?? 'Unknown author' }},
-            {{ $article->created_at }}
-        </p>
-        <div class="content">
-            {{ $article->content }}
-        </div>
+    <div class="prose max-w-none">
+        {!! nl2br(e($article->content)) !!}
     </div>
-    
-    <p><a href="/articles">Back to articles overview </a></p>
-</body>
-</html>
+
+    <p class="mt-6">
+        <a href="{{ route('articles.index') }}" class="text-blue-500 underline">
+            ← Back to articles overview
+        </a>
+    </p>
+</x-site-layout>
