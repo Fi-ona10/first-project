@@ -275,5 +275,20 @@
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
+
+        @if($articles->count())
+    <ul>
+        @foreach($articles as $article)
+            <li>
+                <a href="{{ route('articles.show', $article->id) }}">
+                    {{ $article->title }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+@else
+    <p>No articles yet.</p>
+@endif
+
     </body>
 </html>
