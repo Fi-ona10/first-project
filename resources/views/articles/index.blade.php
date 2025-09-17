@@ -18,7 +18,7 @@
 
                     <p class="text-sm text-gray-600">
                         By {{ $article->author?->name ?? 'Unknown author' }},
-                        {{ $article->created_at->format('F j, Y') }}
+                        {{ $article->created_at ? $article->created_at->format('d.m.Y') : 'No date available' }}
                     </p>
                 </li>
             @endforeach
