@@ -14,6 +14,8 @@ Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
+Route::get('/authors/{id}', [AuthorController::class, 'show'])->name('authors.show');
 
 // Dashboard route with middleware
 Route::view('dashboard', 'dashboard')
