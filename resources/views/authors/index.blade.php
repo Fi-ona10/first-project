@@ -8,11 +8,13 @@
             <ul class="space-y-4">
                 @foreach ($authors as $author)
                     <li class="border p-4 rounded-lg hover:shadow-md transition">
+                        <!-- Link auf Autorenseite -->
                         <a href="{{ route('authors.show', $author->id) }}" class="text-xl font-semibold text-blue-600 hover:underline">
                             {{ $author->name }}
                         </a>
                         <p class="text-gray-500">{{ $author->email }}</p>
 
+                        <!-- Hinweis, falls keine Artikel vorhanden -->
                         @if ($author->articles->isEmpty())
                             <p class="text-sm text-gray-400">(No articles yet)</p>
                         @else
