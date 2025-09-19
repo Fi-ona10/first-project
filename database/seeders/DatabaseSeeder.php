@@ -28,6 +28,11 @@ public function run(): void
 {
     $this->call(EventSeeder::class);
 }
+public function run(): void
+{
+    $this->call(UserSeeder::class);
+}
+
 
     }
 }
