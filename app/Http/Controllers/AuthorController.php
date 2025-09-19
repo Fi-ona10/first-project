@@ -11,4 +11,12 @@ class AuthorController extends Controller
         $authors = User::all();
         return view('authors.index', compact('authors'));
     }
+
+    public function show($id)
+    {
+        // Autor inkl. Artikel laden
+        $author = User::with('articles')->findOrFail($id);
+
+        return view('authors.show', compact('author'));
+    }
 }
