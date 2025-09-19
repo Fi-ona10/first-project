@@ -8,7 +8,9 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = User::all();
+        // Nur User laden, die mindestens einen Artikel geschrieben haben
+        $authors = User::has('articles')->with('articles')->get();
+
         return view('authors.index', compact('authors'));
     }
 
