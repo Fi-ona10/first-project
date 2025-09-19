@@ -9,20 +9,28 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    /**
+     * Die Attribute, die massenweise zuweisbar sind.
+     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
+    /**
+     * Die Attribute, die beim Serialisieren verborgen bleiben.
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+    /**
+     * Die Attribute, die gecastet werden sollen.
+     */
     protected function casts(): array
     {
         return [
@@ -32,7 +40,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's initials
+     * Initialen des Users
      */
     public function initials(): string
     {
