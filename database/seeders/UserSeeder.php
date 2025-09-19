@@ -10,31 +10,29 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // User 1 erstellen
+        // Autor 1
         $user1 = User::create([
             'name' => 'Fiona Example',
             'email' => 'fiona@example.com',
             'password' => bcrypt('secret'),
         ]);
 
-        // Artikel für User 1
         Article::create([
             'title' => 'Fionas Erstes Rezept',
-            'content' => 'Leckeres Rezept von Fiona...',
+            'content' => 'Leckeres Rezept...',
             'user_id' => $user1->id,
         ]);
 
-        // User 2 erstellen
+        // Autor 2
         $user2 = User::create([
             'name' => 'Max Mustermann',
             'email' => 'max@example.com',
             'password' => bcrypt('secret'),
         ]);
 
-        // Artikel für User 2
         Article::create([
-            'title' => 'Max Mustermanns Rezept',
-            'content' => 'Super leckeres Rezept von Max...',
+            'title' => 'Maxs Zweites Rezept',
+            'content' => 'Noch leckereres Rezept...',
             'user_id' => $user2->id,
         ]);
     }
