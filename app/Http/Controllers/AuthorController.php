@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
     public function index()
     {
-        // Nur User laden, die mindestens einen Artikel geschrieben haben
-        $authors = User::has('articles')->with('articles')->get();
-
+        // Alle Benutzer laden
+        $authors = User::all();
         return view('authors.index', compact('authors'));
     }
 
     public function show($id)
     {
-        // Autor inkl. Artikel laden
         $author = User::with('articles')->findOrFail($id);
-
         return view('authors.show', compact('author'));
     }
 }

@@ -17,10 +17,15 @@ class UserSeeder extends Seeder
             'password' => bcrypt('secret'),
         ]);
 
-        Article::create([
-            'title' => 'Fionas Erstes Rezept',
-            'content' => 'Leckeres Rezept...',
-            'user_id' => $user1->id,
+        $user1->articles()->createMany([
+            [
+                'title' => 'Fionas Erstes Rezept',
+                'content' => 'Leckeres Rezept...',
+            ],
+            [
+                'title' => 'Fionas Zweites Rezept',
+                'content' => 'Noch ein tolles Rezept...',
+            ],
         ]);
 
         // Autor 2
@@ -30,10 +35,15 @@ class UserSeeder extends Seeder
             'password' => bcrypt('secret'),
         ]);
 
-        Article::create([
-            'title' => 'Maxs Zweites Rezept',
-            'content' => 'Noch leckereres Rezept...',
-            'user_id' => $user2->id,
+        $user2->articles()->createMany([
+            [
+                'title' => 'Maxs Erstes Rezept',
+                'content' => 'Herzhaftes Rezept von Max...',
+            ],
+            [
+                'title' => 'Maxs Zweites Rezept',
+                'content' => 'Noch leckereres Rezept von Max...',
+            ],
         ]);
     }
 }

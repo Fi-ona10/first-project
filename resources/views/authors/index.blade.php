@@ -9,7 +9,7 @@
                 <li>
                     <a href="{{ route('authors.show', $author->id) }}" class="text-blue-600 hover:underline">
                         {{ $author->name }}
-                    </a> 
+                    </a>
                     <span class="text-sm text-gray-500">({{ $author->email }})</span>
                 </li>
             @endforeach
