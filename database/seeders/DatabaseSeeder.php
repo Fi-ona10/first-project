@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Article;
+use App\Models\Ingredient;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,11 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Always call your seeders here, in the order you need
+        // First, make sure users exist
         $this->call([
             UserSeeder::class,
-            ArticleSeeder::class,
-            EventSeeder::class, // if you still want events
+        ]);
+
+        // Create 10 articles (recipes), each with 7 ingredients
+        Article::factory(10)
+            ->has(Ingredient::factory()->count(7), 'ingredients')
+            ->create();
+
+        // If you still want events, call the EventSeeder
+        $this->call([
+            EventSeeder::class,
         ]);
     }
 }
