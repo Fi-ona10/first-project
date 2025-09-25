@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
-            $table->foreignId('author_id');
             $table->text('content');
+
+            // Correct: use user_id instead of author_id
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });
