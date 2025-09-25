@@ -9,8 +9,8 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        // fetch articles from DB
-        $articles = \App\Models\Article::all();
+        // fetch articles from DB with ingredients eager-loaded
+        $articles = \App\Models\Article::with('ingredients')->get();
 
         //dd($articles); // to quickly analyse what you loaded
 
@@ -22,8 +22,8 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        // fetch the one article that is requested
-        $article = \App\Models\Article::find($id);
+        // fetch the one article that is requested, with its ingredients
+        $article = \App\Models\Article::with('ingredients')->findOrFail($id);
 
         // send article to its view
         // return response
@@ -37,11 +37,30 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        $article = Article::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'author_id' => 1, // quick fix for now
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            'user_id' => ['nullable', 'exists:users,id'],
         ]);
+
+        $article = Article::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'user_id' => $validated['user_id'] ?? auth()->id() ?? 1,
+        ]);
+
+        // Ensure exactly 7 healthy ingredients of 200g exist for every new article
+        $defaultIngredients = [
+            'Spinach', 'Tomatoes', 'Cucumber', 'Chicken Breast', 'Quinoa', 'Greek Yogurt', 'Olive Oil'
+        ];
+
+        foreach ($defaultIngredients as $name) {
+            $article->ingredients()->create([
+                'name' => $name,
+                'quantity_g' => 200,
+                'is_healthy' => true,
+            ]);
+        }
 
         return redirect()->route('articles.show', $article->id);
     }
@@ -56,7 +75,7 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         // Step 1: load the correct article from MODEL
-        $article = \App\Models\Article::find($id);
+        $article = \App\Models\Article::findOrFail($id);
 
         // Step 2: Update the changes
         $article->update([

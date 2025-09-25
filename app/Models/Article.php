@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Ingredient;
+use App\Models\User;
 
 class Article extends Model
 {
@@ -12,22 +16,31 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
-        'user_id', // Autor
+        'user_id', // Author
     ];
 
     /**
-     * Beziehung: Ein Artikel gehört zu einem User (Autor)
+     * Relationship: An article belongs to a user (author)
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
-     * Beziehung: Ein Artikel hat viele Zutaten
+     * Optional: alias for clarity
+     * Relationship: Article's author
      */
-    public function ingredients()
+    public function author(): BelongsTo
     {
-        return $this->hasMany(\App\Models\Ingredients::class, 'recipe_id');
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Relationship: An article has many ingredients
+     */
+    public function ingredients(): HasMany
+    {
+        return $this->hasMany(Ingredient::class, 'article_id');
     }
 }

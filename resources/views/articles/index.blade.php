@@ -20,6 +20,17 @@
                         By {{ $article->author?->name ?? 'Unknown author' }},
                         {{ $article->created_at ? $article->created_at->format('d.m.Y') : 'No date available' }}
                     </p>
+
+                @if($article->ingredients?->count())
+                    <div class="mt-2">
+                        <h3 class="font-semibold">Ingredients (7 x 200 g):</h3>
+                        <ul class="list-disc list-inside text-sm text-gray-700">
+                            @foreach ($article->ingredients->take(7) as $ingredient)
+                                <li>{{ $ingredient->name }} — {{ $ingredient->quantity_g }} g</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 </li>
             @endforeach
         </ul>

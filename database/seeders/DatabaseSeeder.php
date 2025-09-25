@@ -8,22 +8,26 @@ use App\Models\Ingredient;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // First, make sure users exist
+        // Create users first
         $this->call([
             UserSeeder::class,
         ]);
 
-        // Create 10 articles (recipes), each with 7 ingredients
-        Article::factory(10)
-            ->has(Ingredient::factory()->count(7), 'ingredients')
-            ->create();
+        // Create 10 articles; each article gets 7 fixed healthy ingredients of 200g
+        Article::factory(10)->create()->each(function ($article) {
+            $names = ['Spinach','Tomatoes','Cucumber','Chicken Breast','Quinoa','Greek Yogurt','Olive Oil'];
+            foreach ($names as $name) {
+                $article->ingredients()->create([
+                    'name' => $name,
+                    'quantity_g' => 200,
+                    'is_healthy' => true,
+                ]);
+            }
+        });
 
-        // If you still want events, call the EventSeeder
+        // Optional: EventSeeder
         $this->call([
             EventSeeder::class,
         ]);

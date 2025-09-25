@@ -3,18 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Ingredient;
 use App\Models\Article;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Ingredient>
- */
 class IngredientFactory extends Factory
 {
-    protected $model = \App\Models\Ingredient::class;
+    protected $model = Ingredient::class;
 
     public function definition(): array
     {
-        // List of realistic ingredient names
         $ingredientNames = [
             'Tomatoes', 'Salad', 'Potatoes', 'Chicken Breast', 'Quinoa',
             'Mixed Nuts', 'Yoghurt 0% fat', 'Olive Oil', 'Cucumber',
@@ -22,9 +19,10 @@ class IngredientFactory extends Factory
         ];
 
         return [
-            'article_id'   => Article::factory(), // links to a recipe
-            'name'         => $this->faker->randomElement($ingredientNames),
-            'mengenangabe' => $this->faker->numberBetween(50, 500) . ' g', // random fixed quantity
+            'article_id' => Article::factory(),
+            'name'       => $this->faker->randomElement($ingredientNames),
+            'quantity_g' => 200,
+            'is_healthy' => true,
         ];
     }
 }
