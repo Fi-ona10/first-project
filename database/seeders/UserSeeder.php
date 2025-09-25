@@ -4,46 +4,63 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Article;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Autor 1
-        $user1 = User::create([
-            'name' => 'Fiona Example',
-            'email' => 'fiona@example.com',
-            'password' => bcrypt('secret'),
-        ]);
+        // List of authors with their articles
+        $authors = [
+            [
+                'name' => 'Fiona Example',
+                'email' => 'fiona@example.com',
+                'articles' => [
+                    ['title' => 'Fiona’s First Recipe', 'content' => 'Delicious recipe...'],
+                    ['title' => 'Fiona’s Second Recipe', 'content' => 'Another great recipe...'],
+                ],
+            ],
+            [
+                'name' => 'Max Mustermann',
+                'email' => 'max@example.com',
+                'articles' => [
+                    ['title' => 'Max’s First Recipe', 'content' => 'Hearty recipe from Max...'],
+                    ['title' => 'Max’s Second Recipe', 'content' => 'Even tastier recipe from Max...'],
+                ],
+            ],
+            [
+                'name' => 'Anna Healthy',
+                'email' => 'anna@example.com',
+                'articles' => [
+                    ['title' => 'Anna’s Power Salad', 'content' => 'Rich in vitamins and healthy...'],
+                    ['title' => 'Anna’s Smoothie Bowl', 'content' => 'Fruity and refreshing...'],
+                ],
+            ],
+            [
+                'name' => 'Tom Fit',
+                'email' => 'tom@example.com',
+                'articles' => [
+                    ['title' => 'Tom’s Protein Wraps', 'content' => 'Perfect after training...'],
+                    ['title' => 'Tom’s Veggie Stir Fry', 'content' => 'Light and filling...'],
+                ],
+            ],
+            [
+                'name' => 'Laura Vital',
+                'email' => 'laura@example.com',
+                'articles' => [
+                    ['title' => 'Laura’s Lentil Soup', 'content' => 'Hearty and vegan...'],
+                    ['title' => 'Laura’s Overnight Oats', 'content' => 'Quick and nutritious...'],
+                ],
+            ],
+        ];
 
-        $user1->articles()->createMany([
-            [
-                'title' => 'Fionas Erstes Rezept',
-                'content' => 'Leckeres Rezept...',
-            ],
-            [
-                'title' => 'Fionas Zweites Rezept',
-                'content' => 'Noch ein tolles Rezept...',
-            ],
-        ]);
+        foreach ($authors as $authorData) {
+            $user = User::create([
+                'name' => $authorData['name'],
+                'email' => $authorData['email'],
+                'password' => bcrypt('secret'),
+            ]);
 
-        // Autor 2
-        $user2 = User::create([
-            'name' => 'Max Mustermann',
-            'email' => 'max@example.com',
-            'password' => bcrypt('secret'),
-        ]);
-
-        $user2->articles()->createMany([
-            [
-                'title' => 'Maxs Erstes Rezept',
-                'content' => 'Herzhaftes Rezept von Max...',
-            ],
-            [
-                'title' => 'Maxs Zweites Rezept',
-                'content' => 'Noch leckereres Rezept von Max...',
-            ],
-        ]);
+            $user->articles()->createMany($authorData['articles']);
+        }
     }
 }
