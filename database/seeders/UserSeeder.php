@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Article;
 
 class UserSeeder extends Seeder
 {
@@ -60,7 +61,21 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('secret'),
             ]);
 
-            $user->articles()->createMany($authorData['articles']);
+            // Create exactly 2 recipes per author (total 10 recipes)
+            foreach ($authorData['articles'] as $articleData) {
+                /** @var Article $article */
+                $article = $user->articles()->create($articleData);
+
+                // Ensure 7 healthy ingredients of 200 g per recipe
+                $names = ['Spinach','Tomatoes','Cucumber','Chicken Breast','Quinoa','Greek Yogurt','Olive Oil'];
+                foreach ($names as $name) {
+                    $article->ingredients()->create([
+                        'name' => $name,
+                        'quantity_g' => 200,
+                        'is_healthy' => true,
+                    ]);
+                }
+            }
         }
     }
 }

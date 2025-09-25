@@ -10,22 +10,10 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create users first
+        // Create authors and their articles (5 authors, 2 recipes each = 10 recipes)
         $this->call([
             UserSeeder::class,
         ]);
-
-        // Create 10 articles; each article gets 7 fixed healthy ingredients of 200g
-        Article::factory(10)->create()->each(function ($article) {
-            $names = ['Spinach','Tomatoes','Cucumber','Chicken Breast','Quinoa','Greek Yogurt','Olive Oil'];
-            foreach ($names as $name) {
-                $article->ingredients()->create([
-                    'name' => $name,
-                    'quantity_g' => 200,
-                    'is_healthy' => true,
-                ]);
-            }
-        });
 
         // Optional: EventSeeder
         $this->call([
