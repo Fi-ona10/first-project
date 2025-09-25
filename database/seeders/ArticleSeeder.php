@@ -41,7 +41,8 @@ class ArticleSeeder extends Seeder
             Article::create([
                 'title' => $title,
                 'content' => 'This is a healthy recipe description for ' . $title,
-                'user_id' => $author->id,
+                'user_id' => $author->id,      // optional, falls die Spalte noch existiert
+                'author_id' => $author->id,    // muss gesetzt werden, da NOT NULL
             ]);
         }
     }

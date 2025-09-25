@@ -8,14 +8,26 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->foreignId('user_id')->after('id')->constrained()->cascadeOnDelete();
+            // Spalte nur hinzufügen, wenn sie noch nicht existiert
+            if (!Schema::hasColumn('articles', 'user_id')) {
+                $table->unsignedBigInteger('user_id');
+
+                // Foreign Key hinzufügen
+                $table->foreign('user_id')
+                      ->references('id')
+                      ->on('users')
+                      ->cascadeOnDelete();
+            }
         });
     }
 
     public function down(): void
     {
         Schema::table('articles', function (Blueprint $table) {
+            // Foreign Key zuerst entfernen
             $table->dropForeign(['user_id']);
+            
+            // Spalte entfernen
             $table->dropColumn('user_id');
         });
     }
