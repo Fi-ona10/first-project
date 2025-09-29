@@ -1,16 +1,22 @@
+
 <?php
 
 namespace App\Http\Controllers;
 
-class PagesController extends Controller
-{
-    public function home()
-    {
-        return view('welcome');
-    }
+use Illuminate\Http\Request;
 
+class WelcomeController extends Controller
+{
+    public function index()
+    {
+        // Fetch latest 2 articles
+        $articles = \App\Models\Article::latest()->take(2)->get();
+
+        return view('welcome', compact('articles'));
+    }
     public function dashboard()
     {
         return view('dashboard');
     }
+}
 }
