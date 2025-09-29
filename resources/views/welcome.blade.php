@@ -5,6 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <header>
         <title>Articles Overview</title>
+        @if (Route::has('login'))
+        <nav class="flex items-center justify-end gap-4">
+            @auth
+                You are logged in. Welcome {{ auth()->user()->name }}
+            @else
+                <a href="{{ route('login') }}" class="...">Log in</a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="...">Register</a>
+                @endif
+            @endauth
+        </nav>
+    @endif
         </header>
 
         <link rel="icon" href="/favicon.ico" sizes="any">
