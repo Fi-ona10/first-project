@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Article;
 use App\Models\Ingredient;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
         ]);
+
+    public function run(): void
+        {
+            \App\Models\User::create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('password'),
+            ]);
 
         // Optional: seed events if needed
         if (class_exists(EventSeeder::class)) {
