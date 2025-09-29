@@ -10,7 +10,7 @@ class ArticleController extends Controller
     public function index()
     {
         // Fetch up to 10 articles that have healthy ingredients, eager-load only healthy ingredients
-        $articles = \App\Models\Article::query()
+        $articles = Article::query()
             ->whereHas('ingredients', function ($q) {
                 $q->where('is_healthy', true);
             })
@@ -21,23 +21,16 @@ class ArticleController extends Controller
             ->take(10)
             ->get();
 
-        //dd($articles); // to quickly analyse what you loaded
-
-        // send articles to the view
-        // return response
         return view('articles.index', compact('articles'));
-
     }
 
     public function show($id)
     {
-        // fetch the one article that is requested, with its healthy ingredients
-        $article = \App\Models\Article::with(['ingredients' => function ($q) {
+        // Fetch the one article that is requested, with its healthy ingredients
+        $article = Article::with(['ingredients' => function ($q) {
             $q->where('is_healthy', true);
         }])->findOrFail($id);
 
-        // send article to its view
-        // return response
         return view('articles.show', compact('article'));
     }
 
@@ -78,36 +71,34 @@ class ArticleController extends Controller
 
     public function edit($id)
     {
-        $article = \App\Models\Article::find($id);
+        $article = Article::findOrFail($id);
 
         return view('articles.edit', compact('article'));
     }
 
     public function update(Request $request, $id)
     {
-        // Step 1: load the correct article from MODEL
-        $article = \App\Models\Article::findOrFail($id);
-
-        // Step 2: Update the changes
-        $article->update([
-            'title' => $request->title,
-            'content' => $request->content,
+        // 1. Validate the input
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
         ]);
 
-        // Redirect to show
+        // 2. Load the correct article
+        $article = Article::findOrFail($id);
+
+        // 3. Update with validated data
+        $article->update($validated);
+
+        // 4. Redirect back to the article page
         return redirect()->route('articles.show', $article->id);
     }
 
     public function destroy($id)
     {
-        // fetch the one article that is requested
-        $article = \App\Models\Article::find($id);
-
+        $article = Article::findOrFail($id);
         $article->delete();
 
         return redirect()->route('articles.index');
     }
-
-    //
 }
-
