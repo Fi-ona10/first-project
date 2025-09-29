@@ -1,19 +1,39 @@
 <x-site-layout>
 
-    <form action="/articles" method="post">
+    <form action="{{ route('articles.store') }}" method="POST" novalidate>
         @csrf
 
-        <div>
-            <label for="title">Title</label><br/>
-            <input type="text" name="title" class="bg-gray-200">
+        <x-form-errors />
+
+        <div class="mb-4">
+            <label for="title" class="block font-semibold">Title</label>
+            <input
+                id="title"
+                type="text"
+                name="title"
+                value="{{ old('title') }}"
+                class="bg-gray-200 p-2 w-full @error('title') border border-red-500 @enderror"
+                required
+            >
+            @error('title')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
-        <div>
-            <label for="content">Content</label><br/>
-            <textarea name="content" class="bg-gray-200"></textarea>
+        <div class="mb-6">
+            <label for="content" class="block font-semibold">Content</label>
+            <textarea
+                id="content"
+                name="content"
+                class="bg-gray-200 p-2 w-full h-40 @error('content') border border-red-500 @enderror"
+                required
+            >{{ old('content') }}</textarea>
+            @error('content')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            @enderror
         </div>
-        <br/><br/>
 
-        <button class="bg-blue-500 p-1 uppercase" type="submit">Create</button>
+        <button class="bg-blue-500 p-2 text-white uppercase rounded" type="submit">Create</button>
     </form>
+
 </x-site-layout>
