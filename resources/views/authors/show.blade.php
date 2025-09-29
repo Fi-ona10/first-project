@@ -3,7 +3,7 @@
         <h1 class="text-4xl font-bold mb-6">{{ $author->name }}</h1>
         <p class="text-gray-500 mb-8">{{ $author->email }}</p>
 
-        <h2 class="text-2xl font-bold mb-4">List of Articles</h2>
+        <h2 class="text-2xl font-bold mb-4">Articles (2)</h2>
 
         @if($author->articles->isEmpty())
             <p class="text-gray-500">This author has not published any articles yet.</p>

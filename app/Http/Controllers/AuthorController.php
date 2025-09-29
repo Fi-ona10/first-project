@@ -9,14 +9,17 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        // Alle Benutzer laden
+        // Load all users
         $authors = User::all();
         return view('authors.index', compact('authors'));
     }
 
     public function show($id)
     {
-        $author = User::with('articles')->findOrFail($id);
+        // Load author with at most 2 linked articles
+        $author = User::with(['articles' => function ($q) {
+            $q->latest()->take(2);
+        }])->findOrFail($id);
         return view('authors.show', compact('author'));
     }
 }

@@ -13,10 +13,10 @@
 
     @if($article->ingredients?->count())
         <div class="mt-6">
-            <h2 class="text-2xl font-semibold mb-2">Ingredients (7 x 200 g)</h2>
+            <h2 class="text-2xl font-semibold mb-2">Healthy ingredients (7)</h2>
             <ul class="list-disc list-inside text-gray-800">
                 @foreach ($article->ingredients->take(7) as $ingredient)
-                    <li>{{ $ingredient->name }} — {{ $ingredient->quantity_g }} g</li>
+                    <li>1 {{ strtolower($ingredient->name) }}</li>
                 @endforeach
             </ul>
         </div>

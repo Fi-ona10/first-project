@@ -15,9 +15,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        // Optional: EventSeeder
-        $this->call([
-            EventSeeder::class,
-        ]);
+        // Optional: seed events if needed
+        if (class_exists(EventSeeder::class)) {
+            $this->call([
+                EventSeeder::class,
+            ]);
+        }
     }
 }

@@ -9,8 +9,17 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        // fetch articles from DB with ingredients eager-loaded
-        $articles = \App\Models\Article::with('ingredients')->get();
+        // Fetch up to 10 articles that have healthy ingredients, eager-load only healthy ingredients
+        $articles = \App\Models\Article::query()
+            ->whereHas('ingredients', function ($q) {
+                $q->where('is_healthy', true);
+            })
+            ->with(['ingredients' => function ($q) {
+                $q->where('is_healthy', true);
+            }])
+            ->latest()
+            ->take(10)
+            ->get();
 
         //dd($articles); // to quickly analyse what you loaded
 
@@ -22,8 +31,10 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        // fetch the one article that is requested, with its ingredients
-        $article = \App\Models\Article::with('ingredients')->findOrFail($id);
+        // fetch the one article that is requested, with its healthy ingredients
+        $article = \App\Models\Article::with(['ingredients' => function ($q) {
+            $q->where('is_healthy', true);
+        }])->findOrFail($id);
 
         // send article to its view
         // return response
