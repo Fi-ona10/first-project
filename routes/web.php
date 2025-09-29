@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthorController; // <- diese Zeile neu
+use App\Http\Controllers\PagesController; 
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -13,18 +14,17 @@ Route::resource('articles', ArticleController::class);
 
 
 // Home route
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [PagesController::class, 'home'])->name('home');
 
 // Authors routes
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
 Route::get('/authors/{id}', [AuthorController::class, 'show'])->name('authors.show');
 
 // Dashboard route with middleware
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', [PagesController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
 
 // Grouped routes for authenticated users
 Route::middleware(['auth'])->group(function () {
