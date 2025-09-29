@@ -8,8 +8,9 @@ use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
 // Articles routes with names
-Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+// Full CRUD routes for Articles
+Route::resource('articles', ArticleController::class);
+
 
 // Home route
 Route::get('/', function () {
