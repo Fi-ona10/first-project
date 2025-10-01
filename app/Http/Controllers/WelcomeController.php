@@ -13,3 +13,15 @@ class WelcomeController extends Controller
     }
 }
 
+use Illuminate\Support\Facades\Auth;
+
+public function index()
+{
+    if (Auth::check()) {
+        $articles = \App\Models\Article::where('user_id', Auth::id())->get();
+    } else {
+        $articles = \App\Models\Article::latest()->take(5)->get();
+    }
+
+    return view('welcome', compact('articles'));
+}
