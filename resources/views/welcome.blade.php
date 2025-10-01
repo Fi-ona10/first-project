@@ -1,7 +1,5 @@
 {{-- resources/views/welcome.blade.php --}}
-@extends('components.site-layout')
-
-@section('content')
+<x-site-layout>
     <div class="max-w-4xl mx-auto py-10">
         <header class="flex justify-end mb-6">
             @if (Route::has('login'))
@@ -15,9 +13,8 @@
                         @endif
                     @endauth
                     @auth
-                    <p class="mb-4">Welcome back, {{ Auth::user()->name }}!</p>
+                        <p class="mb-4">Welcome back, {{ Auth::user()->name }}!</p>
                     @endauth
-
                 </nav>
             @endif
         </header>
@@ -36,4 +33,4 @@
             <p>No articles available yet.</p>
         @endforelse
     </div>
-@endsection
+</x-site-layout>
