@@ -1,5 +1,4 @@
-<x-site-layout>
-<{{-- resources/views/welcome.blade.php --}}
+{{-- resources/views/welcome.blade.php --}}
 @extends('components.site-layout')
 
 @section('content')
@@ -34,4 +33,3 @@
         @endforelse
     </div>
 @endsection
-</x-site-layout>
