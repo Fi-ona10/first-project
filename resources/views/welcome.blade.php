@@ -14,6 +14,10 @@
                             <a href="{{ route('register') }}" class="text-blue-500">Register</a>
                         @endif
                     @endauth
+                    @auth
+                    <p class="mb-4">Welcome back, {{ Auth::user()->name }}!</p>
+                    @endauth
+
                 </nav>
             @endif
         </header>
