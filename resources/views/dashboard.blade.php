@@ -1,17 +1,21 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<x-site-layout>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+    <h1 class="text-2xl font-bold mb-6">Latest Articles</h1>
+
+    @if($articles->isEmpty())
+        <p>No articles available yet.</p>
+    @else
+        <ul class="space-y-4">
+            @foreach ($articles as $article)
+                <li class="border p-4 rounded">
+                    <a href="{{ route('articles.show', $article) }}" class="text-blue-600 hover:underline">
+                        {{ $article->title }}
+                    </a>
+                    <p class="text-gray-700 mt-1">{{ Str::limit($article->content, 100) }}</p>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+
+</x-site-layout>
+
