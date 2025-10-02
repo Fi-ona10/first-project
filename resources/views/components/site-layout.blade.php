@@ -6,23 +6,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="">
+    
 <header class="max-w-6xl mx-auto bg-blue-500 text-xl text-white mb-4 flex items-center justify-between h-12 px-4">
     <div class="font-bold">
         Healthy Recipes!
     </div>
+
     <nav class="flex space-x-6">
         <a href="/articles" class="hover:underline">All recipes</a>
         <a href="/authors" class="hover:underline">All authors</a>
     </nav>
-    @auth
-    {{ auth()->user()->name }} |
-    <form action="{{ route('logout') }}" method="post" class="inline">
-        @csrf 
-        <button type="submit">Logout</button>
-    </form>
-@else
-    <a href="{{ route('login') }}">Login</a>
-@endauth
+
+    <div class="flex items-center space-x-4">
+        @auth
+            <span>{{ auth()->user()->name }}</span>
+            <a href="{{ route('articles.create') }}" class="hover:underline">New Article</a>
+            <form action="{{ route('logout') }}" method="post" class="inline">
+                @csrf 
+                <button type="submit" class="hover:underline">Logout</button>
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="hover:underline">Login</a>
+        @endauth
+    </div>
 </header>
 
 <main class="max-w-6xl mx-auto px-4 py-4">
