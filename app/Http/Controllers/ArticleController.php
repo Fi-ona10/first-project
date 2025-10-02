@@ -44,15 +44,14 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'user_id' => ['nullable', 'exists:users,id'],
         ]);
-
+        
         $article = Article::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
-            'user_id' => $validated['user_id'] ?? auth()->id() ?? 1,
+            'user_id' => auth()->id(), // automatisch eingeloggter User
         ]);
-
+        
         // Ensure exactly 7 healthy ingredients of 200g exist for every new article
         $defaultIngredients = [
             'Spinach', 'Tomatoes', 'Cucumber', 'Chicken Breast', 'Quinoa', 'Greek Yogurt', 'Olive Oil'
