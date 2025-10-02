@@ -14,6 +14,15 @@
         <a href="/articles" class="hover:underline">All recipes</a>
         <a href="/authors" class="hover:underline">All authors</a>
     </nav>
+    @auth
+    {{ auth()->user()->name }} |
+    <form action="{{ route('logout') }}" method="post" class="inline">
+        @csrf 
+        <button type="submit">Logout</button>
+    </form>
+@else
+    <a href="{{ route('login') }}">Login</a>
+@endauth
 </header>
 
 <main class="max-w-6xl mx-auto px-4 py-4">
