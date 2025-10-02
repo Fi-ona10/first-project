@@ -10,7 +10,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'index'])->name('home'); // nur eine Definition
 
 // Articles routes (CRUD)
-Route::resource('articles', ArticleController::class);
+// Nur index und show sind für alle zugänglich
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+
+// create, store, edit, update, destroy nur für eingeloggte User
+Route::middleware('auth')->group(function () {
+    Route::resource('articles', ArticleController::class)->only([
+        'create', 'store', 'edit', 'update', 'destroy'
+    ]);
+});
 
 // Authors routes
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
