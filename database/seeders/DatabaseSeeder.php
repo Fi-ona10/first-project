@@ -18,11 +18,17 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
         {
-            \App\Models\User::create([
+            \App\Models\User::factory()->create([
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('password'),
             ]);
+
+
+    \App\Models\User::factory(10)->create();
+    \App\Models\Article::factory(20)->create();
+    \App\Models\Ingredient::factory(10)->create(); 
+}
 
         // Optional: seed events if needed
         if (class_exists(EventSeeder::class)) {
