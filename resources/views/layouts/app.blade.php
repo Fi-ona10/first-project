@@ -6,7 +6,7 @@
     <title>{{ config('app.name', 'My App') }}</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 font-serif">
 
     <!-- NAVIGATION BAR -->
     <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-50">
@@ -57,3 +57,4 @@
     </footer>
 </body>
 </html>
+
