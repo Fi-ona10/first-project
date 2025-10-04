@@ -1,6 +1,12 @@
 <x-site-layout>
     <h1 class="text-4xl font-bold mb-6">All Articles</h1>
 
+    {{-- New Article button --}}
+    <a href="{{ route('articles.create') }}" 
+       class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg shadow mb-6">
+       New Article
+    </a>
+
     @if ($articles->isEmpty())
         <p class="text-gray-500">No articles yet.</p>
     @else
@@ -8,7 +14,8 @@
             @foreach ($articles as $article)
                 <li class="article border-b pb-4">
                     <h2 class="text-2xl font-semibold">
-                        <a href="/articles/{{ $article->id }}" class="text-blue-600 hover:underline">
+                        <a href="{{ route('articles.show', $article) }}" 
+                           class="text-blue-600 hover:underline">
                             {{ $article->title }}
                         </a>
                     </h2>
@@ -36,4 +43,3 @@
         </ul>
     @endif
 </x-site-layout>
-
