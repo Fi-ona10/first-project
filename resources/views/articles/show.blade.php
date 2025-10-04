@@ -16,7 +16,7 @@
     @endauth
 
 
-    <div class="mb-2 text-blue-800">by our reporter: {{$article->author->name}}.</div>
+    <div class="mb-2 text-violet-800">by our reporter: {{$article->author->name}}.</div>
     <div>
         {{$article->content}}
     </div>
@@ -42,7 +42,7 @@
     @endif
 
     <p class="mt-6">
-        <a href="{{ route('articles.index') }}" class="text-blue-500 underline">
+        <a href="{{ route('articles.index') }}" class="text-violet-500 underline">
             ← Back to articles overview
         </a>
     </p>

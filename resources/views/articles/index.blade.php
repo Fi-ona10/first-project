@@ -15,7 +15,7 @@
                 <div class="bg-white shadow rounded-lg p-6 mb-6">
                     <h2 class="text-2xl font-semibold">
                         <a href="{{ route('articles.show', $article) }}" 
-                           class="text-blue-600 hover:underline">
+                           class="text-violet-600 hover:underline">
                             {{ $article->title }}
                         </a>
                     </h2>
