@@ -7,7 +7,7 @@
 </head>
 <body class="">
     
-<header class="max-w-6xl mx-auto bg-blue-500 text-xl text-white mb-4 flex items-center justify-between h-12 px-4">
+<header class="max-w-6xl mx-auto bg-violet-500 text-xl text-white mb-4 flex items-center justify-between h-12 px-4">
     <div class="font-bold">
         Healthy Recipes!
     </div>
@@ -35,7 +35,7 @@
     {{$slot}}
 </main> 
 
-<footer class="bg-blue-900 text-white mt-12 min-h-20">
+<footer class="bg-violet-300 text-white mt-12 min-h-20">
     <div class="max-w-6xl mx-auto px-20 py-4">
         High protein recipes for a healthy lifestyle.
     </div>
