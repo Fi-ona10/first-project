@@ -12,7 +12,7 @@
     @else
         <ul class="space-y-6">
             @foreach ($articles as $article)
-                <li class="article border-b pb-4">
+                <div class="bg-white shadow rounded-lg p-6 mb-6">
                     <h2 class="text-2xl font-semibold">
                         <a href="{{ route('articles.show', $article) }}" 
                            class="text-blue-600 hover:underline">
@@ -38,7 +38,7 @@
                             </ul>
                         </div>
                     @endif
-                </li>
+                </div>
             @endforeach
         </ul>
     @endif
