@@ -1,18 +1,6 @@
 <x-site-layout>
     <h1 class="text-4xl font-bold">{{ $article->title }}</h1>
     
-    @auth
-        @if($article->canEditOrDelete(auth()->user()))
-            <a href="management/articles/{{$article->id}}/edit" class="underline">EDIT</a>
-
-            <form action="management/articles/{{$article->id}}" method="post">
-                @method('DELETE')
-                @csrf
-                <button  class="underline">DELETE</button>
-            </form>
-        @endif
-    @endauth
-
 
     <div class="mb-2 text-violet-800">by our reporter: {{$article->author->name}}.</div>
     <div>
