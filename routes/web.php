@@ -17,7 +17,7 @@ Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
 // Article Management (nur für eingeloggte User / Admin-Bereich)
 Route::middleware(['auth'])->prefix('management')->name('management.')->group(function () {
-    Route::resource('articles', ArticleManagementController::class)->except(['show']);
+    Route::resource('articles', ArticleManagementController::class);
 });
 
 

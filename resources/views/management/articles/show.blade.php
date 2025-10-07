@@ -1,17 +1,20 @@
 <x-site-layout>
     <h1 class="text-4xl font-bold">{{ $article->title }}</h1>
     
-    @auth
-        @if($article->canEditOrDelete(auth()->user()))
-            <a href="management/articles/{{$article->id}}/edit" class="underline">EDIT</a>
+@auth
+    @if($article->canEditOrDelete(auth()->user()))
+        <!-- Edit Link -->
+        <a href="{{ route('management.articles.edit', $article->id) }}" class="underline">EDIT</a>
 
-            <form action="management/articles/{{$article->id}}" method="post">
-                @method('DELETE')
-                @csrf
-                <button  class="underline">DELETE</button>
-            </form>
-        @endif
-    @endauth
+        <!-- Delete Form -->
+        <form action="{{ route('management.articles.destroy', $article->id) }}" method="POST" style="display:inline;">
+            @method('DELETE')
+            @csrf
+            <button class="underline">DELETE</button>
+        </form>
+    @endif
+@endauth
+
 
 
     <div class="mb-2 text-violet-800">by our reporter: {{$article->author->name}}.</div>
