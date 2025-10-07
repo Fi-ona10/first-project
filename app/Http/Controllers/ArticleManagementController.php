@@ -50,7 +50,7 @@ class ArticleManagementController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('management.articles.show', $article->id);
+        return redirect()->route('articles.show', $article->id);
     }
 
     public function edit($id)
@@ -60,7 +60,7 @@ class ArticleManagementController extends Controller
 
         // Check access rights
         if (! $article->canEditOrDelete( auth()->user() )) {
-            return redirect()->route('management.articles.show', ['id' => $article->id]);
+            return redirect()->route('articles.show', ['id' => $article->id]);
         }
 
         return view('management.articles.edit', compact('article'));
@@ -91,7 +91,7 @@ class ArticleManagementController extends Controller
         session()->flash('specialMessage', 'Your update of the article was successful');
 
         // Redirect to show
-        return redirect()->route('management.articles.show', $article->id);
+        return redirect()->route('articles.show', $article->id);
     }
 
     public function destroy($id)
