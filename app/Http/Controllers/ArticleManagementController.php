@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Article;
 
 use Illuminate\Http\Request;
 
@@ -46,10 +47,10 @@ class ArticleManagementController extends Controller
         $article = Article::create([
             'title' => $request->title,
             'content' => $request->content,
-            'author_id' => auth()->user()->id,
+            'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('articles.show', $article->id);
+        return redirect()->route('management.articles.show', $article->id);
     }
 
     public function edit($id)
@@ -59,7 +60,7 @@ class ArticleManagementController extends Controller
 
         // Check access rights
         if (! $article->canEditOrDelete( auth()->user() )) {
-            return redirect()->route('articles.show', ['id' => $article->id]);
+            return redirect()->route('management.articles.show', ['id' => $article->id]);
         }
 
         return view('management.articles.edit', compact('article'));
@@ -90,7 +91,7 @@ class ArticleManagementController extends Controller
         session()->flash('specialMessage', 'Your update of the article was successful');
 
         // Redirect to show
-        return redirect()->route('articles.show', $article->id);
+        return redirect()->route('management.articles.show', $article->id);
     }
 
     public function destroy($id)
@@ -105,7 +106,7 @@ class ArticleManagementController extends Controller
 
         $article->delete();
 
-        return redirect()->route('articles.index');
+        return redirect()->route('management.articles.index');
     }
 
 }
