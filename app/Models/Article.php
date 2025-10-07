@@ -43,4 +43,13 @@ class Article extends Model
     {
         return $this->hasMany(Ingredient::class, 'article_id');
     }
+        /**
+     * Prüft, ob der eingeloggte User diesen Artikel bearbeiten oder löschen darf.
+     */
+    public function canEditOrDelete(): bool
+    {
+        // Gibt true zurück, wenn ein User eingeloggt ist UND dieser der Autor ist
+        return auth()->check() && auth()->id() === $this->user_id;
+    }
+
 }
