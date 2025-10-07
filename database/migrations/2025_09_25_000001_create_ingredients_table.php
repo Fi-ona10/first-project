@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('article_id')->constrained('articles')->cascadeOnDelete();
             $table->string('name');
-            $table->unsignedInteger('quantity_g')->default(200);
+            $table->unsignedInteger('quantity')->default(200);
             $table->boolean('is_healthy')->default(true);
             $table->timestamps();
         });

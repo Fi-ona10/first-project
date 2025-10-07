@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
+            $table->text('description')->nullable(); 
             $table->text('content');
 
             // Correct: use user_id instead of author_id

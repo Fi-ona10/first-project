@@ -25,7 +25,7 @@ class IngredientFactory extends Factory
         return [
             'article_id' => Article::factory(), // oder ein existierender Artikel
             'name'       => $this->faker->randomElement($ingredientNames),
-            'quantity'   => $this->faker->numberBetween(50, 300) . 'g', // Optional Einheit
+            'quantity'   => $this->faker->numberBetween(50, 300), // Optional Einheit
             'is_healthy' => true, // Alle Zutaten sind gesund
         ];
     }

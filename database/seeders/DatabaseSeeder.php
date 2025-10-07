@@ -19,12 +19,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 2️⃣ Additional users (realistic authors)
-        User::factory(5)
-            ->has(
-                Article::factory(3) // jeder Autor bekommt 3 Artikel
-                    ->hasIngredients(5) // jeder Artikel bekommt 5 Zutaten
-            )
-            ->create();
+        for ($i = 1; $i <= 5; $i++) {
+            $user = User::factory()->create([
+                'email' => "author{$i}@example.com", // eindeutige Email pro User
+            ]);
+
+            // jeder Autor bekommt 3 Artikel mit 5 Zutaten
+            Article::factory(3)
+                ->for($user)
+                ->hasIngredients(5)
+                ->create();
+        }
 
         // 3️⃣ Extra articles for admin (mit Zutaten)
         Article::factory(3)
