@@ -1,7 +1,7 @@
 <x-site-layout>
     <h1 class="text-2xl font-bold mb-6">Create New Article</h1>
 
-    <form action="{{ route('articles.store') }}" method="POST" novalidate>
+    <form action="{{ route('management.articles.store') }}" method="POST" novalidate>
         @csrf
 
         <x-form-errors />

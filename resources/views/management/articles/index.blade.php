@@ -2,7 +2,7 @@
     <h1 class="text-4xl font-bold mb-6">All Articles</h1>
 
     {{-- New Article button --}}
-    <a href="{{ route('articles.create') }}" 
+    <a href="{{ route('management.articles.create') }}" 
        class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg shadow mb-6">
        New Article
     </a>
@@ -14,7 +14,7 @@
             @foreach ($articles as $article)
                 <div class="bg-white shadow rounded-lg p-6 mb-6">
                     <h2 class="text-2xl font-semibold">
-                        <a href="{{ route('articles.show', $article) }}" 
+                        <a href="{{ route('management.articles.show', $article) }}" 
                            class="text-violet-600 hover:underline">
                             {{ $article->title }}
                         </a>

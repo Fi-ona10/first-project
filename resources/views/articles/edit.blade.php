@@ -1,7 +1,7 @@
 
 <x-site-layout>
 
-    <form action="{{ route('articles.update', $article->id) }}" method="POST" novalidate>
+    <form action="{{ route('management.articles.update', $article->id) }}" method="POST" novalidate>
         @method('PUT')
         @csrf
 

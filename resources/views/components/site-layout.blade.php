@@ -20,7 +20,7 @@
     <div class="flex items-center space-x-4">
         @auth
             <span>{{ auth()->user()->name }}</span>
-            <a href="{{ route('articles.create') }}" class="hover:underline">New Article</a>
+            <a href="{{ route('management.articles.create') }}" class="hover:underline">New Article</a>
             <form action="{{ route('logout') }}" method="post" class="inline">
                 @csrf 
                 <button type="submit" class="hover:underline">Logout</button>

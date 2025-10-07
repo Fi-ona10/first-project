@@ -5,6 +5,8 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleManagementController;
+
 
 // Startseite
 Route::get('/', [WelcomeController::class, 'index'])->name('home'); // nur eine Definition
@@ -13,12 +15,11 @@ Route::get('/', [WelcomeController::class, 'index'])->name('home'); // nur eine 
 // Nur index und show sind für alle zugänglich
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
-// create, store, edit, update, destroy nur für eingeloggte User
-Route::middleware('auth')->group(function () {
-    Route::resource('articles', ArticleController::class)->only([
-        'create', 'store', 'edit', 'update', 'destroy'
-    ]);
+// Article Management (nur für eingeloggte User / Admin-Bereich)
+Route::middleware(['auth'])->prefix('management')->name('management.')->group(function () {
+    Route::resource('articles', ArticleManagementController::class)->except(['show']);
 });
+
 
 // Authors routes
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');

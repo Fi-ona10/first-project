@@ -3,9 +3,9 @@
     
     @auth
         @if($article->canEditOrDelete(auth()->user()))
-            <a href="/articles/{{$article->id}}/edit" class="underline">EDIT</a>
+            <a href="management/articles/{{$article->id}}/edit" class="underline">EDIT</a>
 
-            <form action="/articles/{{$article->id}}" method="post">
+            <form action="management/articles/{{$article->id}}" method="post">
                 @method('DELETE')
                 @csrf
                 <button  class="underline">DELETE</button>
@@ -40,7 +40,7 @@
     @endif
 
     <p class="mt-6">
-        <a href="{{ route('articles.index') }}" class="text-violet-500 underline">
+        <a href="{{ route('management.articles.index') }}" class="text-violet-500 underline">
             ← Back to articles overview
         </a>
     </p>
