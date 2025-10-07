@@ -26,13 +26,20 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        // Fetch the one article that is requested, with its healthy ingredients
+        // Fetch the article with healthy ingredients
         $article = Article::with(['ingredients' => function ($q) {
             $q->where('is_healthy', true);
         }])->findOrFail($id);
-
+    
+        // Wenn der User eingeloggt ist und der Autor ist, auf Management weiterleiten
+        if (auth()->check() && auth()->id() === $article->user_id) {
+            return redirect()->route('management.articles.show', $article->id);
+        }
+    
+        // Alle anderen sehen die normale Show-View
         return view('articles.show', compact('article'));
     }
+    
 
     public function create()
     {
