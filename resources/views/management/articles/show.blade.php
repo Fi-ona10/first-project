@@ -40,7 +40,7 @@
     @endif
 
     <p class="mt-6">
-        <a href="{{ route('management.articles.index') }}" class="text-violet-500 underline">
+        <a href="{{ route('articles.index') }}" class="text-violet-500 underline">
             ← Back to articles overview
         </a>
     </p>
