@@ -10,8 +10,6 @@
                 @csrf
                 <button  class="underline">DELETE</button>
             </form>
-        @else
-            <span class="text-xs">If something is wrong.....</span>
         @endif
     @endauth
 
