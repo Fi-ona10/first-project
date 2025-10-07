@@ -23,13 +23,10 @@ class IngredientFactory extends Factory
         ];
 
         return [
-            // wird beim Seeden automatisch überschrieben, wenn Artikel schon existieren
-            'article_id' => Article::factory(),
+            'article_id' => Article::factory(), // oder ein existierender Artikel
             'name'       => $this->faker->randomElement($ingredientNames),
-            'quantity_g' => $this->faker->numberBetween(50, 300),
-            'is_healthy' => $this->faker->boolean(90), // 90% healthy
-            'created_at' => now(),
-            'updated_at' => now(),
+            'quantity'   => $this->faker->numberBetween(50, 300) . 'g', // Optional Einheit
+            'is_healthy' => true, // Alle Zutaten sind gesund
         ];
     }
 }
