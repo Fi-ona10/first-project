@@ -25,7 +25,7 @@
             <div class="mb-6 border-b pb-4">
                 <h2 class="text-xl font-semibold">{{ $article->title }}</h2>
                 <p>{{ Str::limit($article->content, 150) }}</p>
-                <a href="{{ route('management.articles.show', $article) }}" class="text-blue-500 hover:underline">
+                <a href="{{ route('articles.show', $article) }}" class="text-blue-500 hover:underline">
                     Read more →
                 </a>
             </div>
