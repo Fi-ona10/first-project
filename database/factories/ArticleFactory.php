@@ -15,11 +15,41 @@ class ArticleFactory extends Factory
 
     public function definition(): array
     {
-        return [
-            'title'   => $this->faker->sentence(4),
-            'content' => $this->faker->paragraph(5),
 
-            // Automatically assign to a random user (author)
+        $recipeTitles = [
+            'Healthy Avocado Salad',
+            'Quinoa Power Bowl',
+            'Vegan Buddha Bowl',
+            'Grilled Salmon with Veggies',
+            'Protein Smoothie Delight',
+            'Zucchini Noodles with Pesto',
+            'Berry Oatmeal Breakfast'
+        ];
+
+        // Kurzbeschreibung für Rezepte
+        $descriptions = [
+            'A fresh and nutritious salad perfect for lunch.',
+            'A protein-packed bowl for energy all day.',
+            'A colorful and healthy vegan option.',
+            'Simple grilled salmon with seasonal vegetables.',
+            'A delicious smoothie with berries and protein.',
+            'Low-carb zucchini noodles with tasty pesto.',
+            'Hearty oatmeal breakfast to start your day.'
+        ];
+
+        // Bullet points für Eigenschaften/Geschmack
+        $bodyBullets = [
+            '• Fresh and light',
+            '• Easy to prepare',
+            '• High in protein',
+            '• Delicious and healthy',
+            '• Perfect for meal prep',
+        ];
+
+        return [
+            'title' => $this->faker->randomElement($recipeTitles),
+            'description' => $this->faker->randomElement($descriptions),
+            'content' => implode("\n", $this->faker->randomElements($bodyBullets, 3)),
             'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
         ];
     }
