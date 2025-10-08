@@ -16,7 +16,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('home'); // nur eine 
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
 // Article Management (nur für eingeloggte User / Admin-Bereich)
-Route::middleware(['auth'])->prefix('management')->name('management.')->group(function () {
+Route::middleware(['auth','verified'])->prefix('management')->name('management.')->group(function () {
     Route::resource('articles', ArticleManagementController::class);
 });
 
