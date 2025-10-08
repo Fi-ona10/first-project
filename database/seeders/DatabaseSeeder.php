@@ -37,7 +37,5 @@ class DatabaseSeeder extends Seeder
             ->hasIngredients(5)
             ->create();
 
-            // Articles mit Bildern
-            \App\Models\Article::factory(10)->create();
     }
 }
