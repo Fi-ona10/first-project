@@ -50,7 +50,8 @@ class ArticleFactory extends Factory
             'title' => $this->faker->randomElement($recipeTitles),
             'description' => $this->faker->randomElement($descriptions),
             'content' => implode("\n", $this->faker->randomElements($bodyBullets, 3)),
-            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
+            'user_id' => User::factory(),
+
         ];
     }
 }
