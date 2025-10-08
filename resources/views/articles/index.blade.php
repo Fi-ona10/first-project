@@ -16,6 +16,9 @@
         <ul class="space-y-6">
             @foreach ($articles as $article)
                 <div class="bg-white shadow rounded-lg p-6 mb-6">
+                @if($article->image)
+                    <img src="{{ $article->image }}" alt="{{ $article->title }}" class="w-full h-48 object-cover rounded-lg mb-4">
+                @endif
                     <h2 class="text-2xl font-semibold">
                         <a href="{{ route('articles.show', $article) }}" 
                            class="text-violet-600 hover:underline">

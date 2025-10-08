@@ -51,6 +51,7 @@ class ArticleFactory extends Factory
             'description' => $this->faker->randomElement($descriptions),
             'content' => implode("\n", $this->faker->randomElements($bodyBullets, 3)),
             'user_id' => User::factory(),
+            'image' => 'https://source.unsplash.com/800x600/?healthy-food&sig=' . rand(1, 1000),
 
         ];
     }
