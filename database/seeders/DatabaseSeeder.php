@@ -36,5 +36,8 @@ class DatabaseSeeder extends Seeder
             ->for($admin)
             ->hasIngredients(5)
             ->create();
+
+            // Articles mit Bildern
+            \App\Models\Article::factory(10)->create();
     }
 }
