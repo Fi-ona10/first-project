@@ -1,10 +1,13 @@
 <x-site-layout>
     <h1 class="text-4xl font-bold mb-6">All Articles</h1>
 
-    {{-- New Article button --}}
+    
     <a href="{{ route('management.articles.create') }}" 
        class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg shadow mb-6">
-       New Article
+        <x-primary-button>
+            New article
+        </x-primary-button>
+
     </a>
 
     @if ($articles->isEmpty())

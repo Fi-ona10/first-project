@@ -25,7 +25,10 @@
                     @auth
                         <a href="{{ route('articles.create') }}" 
                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">
-                            ➕ New Article
+                        <x-primary-button>
+                            New article
+                        </x-primary-button>
+
                         </a>
                         <a href="{{ route('profile.edit') }}" class="text-slate-700 hover:text-indigo-600 font-medium">
                             Profile
