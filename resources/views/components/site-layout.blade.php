@@ -3,12 +3,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Healthy Recipes</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js']) 
+
 </head>
 <body class="">
     
 <header class="max-w-6xl mx-auto bg-violet-500 text-xl text-white mb-4 flex items-center justify-between h-12 px-4">
-    <div class="font-bold">
+    <div class="font-serif">
         Healthy Recipes!
     </div>
 
