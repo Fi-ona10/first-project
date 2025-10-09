@@ -23,7 +23,7 @@ class ArticleFactory extends Factory
             'Grilled Salmon with Veggies',
             'Protein Smoothie Delight',
             'Zucchini Noodles with Pesto',
-            'Berry Oatmeal Breakfast'
+            'Berry Oatmeal Breakfast',
             'Spicy Chickpea Wraps with Yogurt Sauce',
             'Sweet Potato Curry with Coconut Milk',
             'Greek Chicken Bowl with Tzatziki'
