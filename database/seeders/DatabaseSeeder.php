@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             Article::factory(3)
                 ->for($user)
                 ->hasIngredients(5)
+                ->state(['image' => null])
                 ->create();
         }
 
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
         Article::factory(3)
             ->for($admin)
             ->hasIngredients(5)
+            ->state(['image' => null])
             ->create();
 
     }
