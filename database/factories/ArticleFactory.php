@@ -36,7 +36,7 @@ class ArticleFactory extends Factory
             'Simple grilled salmon with seasonal vegetables.',
             'A delicious smoothie with berries and protein.',
             'Low-carb zucchini noodles with tasty pesto.',
-            'Hearty oatmeal breakfast to start your day.'
+            'Hearty oatmeal breakfast to start your day.',
             'Balanced in carbs, protein, and healthy fats.',
             'Ideal after a workout or as a colorful dinner option.',
             'Naturally gluten-free and full of fresh ingredients.'
