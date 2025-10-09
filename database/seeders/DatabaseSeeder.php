@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ]);
 
             // jeder Autor bekommt 3 Artikel mit 5 Zutaten
-            Article::factory(3)
+            Article::factory(fake()->numberBetween(3, 5))
                 ->for($user)
                 ->hasIngredients(5)
                 ->state(['image' => null])
@@ -38,6 +38,14 @@ class DatabaseSeeder extends Seeder
             ->hasIngredients(5)
             ->state(['image' => null])
             ->create();
+
+                    // Plus a static "welcome" article
+        Article::factory()->for($admin)->create([
+            'title' => 'Welcome to the Healthy Recipes Blog',
+            'description' => 'Discover fresh, balanced and delicious meals made with love.',
+            'content' => "Here you’ll find a collection of nutritious recipes created by different authors. Each recipe is designed to inspire healthy eating without compromising on taste.\n\nBrowse through the sections, read the tips, and enjoy exploring your next favorite meal!",
+            'image' => null,
+        ]);
 
     }
 }
